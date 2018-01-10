@@ -1,0 +1,76 @@
+Directory:
+A folder used for storing multiple files.
+
+Repository:
+A directory where Git has been initialized to start version controlling your files.
+
+Staging Area:
+A place where we can group files together before we "commit" them to Git.
+
+Commit:
+A "commit" is a snapshot of our repository. This way if we ever need to look back at the changes we've made (or if someone else does), we will see a nice timeline of all changes.
+
+http://marklodato.github.io/visual-git-guide/index-en.html
+
+
+::::- Commands -::::
+
+git init // initialize repo
+
+git status // check status of repo
+
+git add <filename> // add file to staging area (a staged file is one thats ready to be committed)
+
+git add -A . // add all files from current directory to the staging area, -A ensures even file deletions are included
+
+git reset <filename> // remove file from a staging area
+git rm --cached <file>
+
+git commit -m <message of what was changed> // add files from stage to our repository, We could add or remove files from the stage before we store them in the repository.
+
+git add '*.txt' // all files, even files inside of any folders are added to the staging area, use quotes to avoid console inteference with something thats meant to be received by git.
+git status // the repo status can be checked to see the files in staging area
+
+git log // journal that remembers all the changes we've committed so far, displays date time and author of commit
+git log --summary // more information on each commit
+
+git remote add origin <url> // To push our local repo(branch: master) to the GitHub server we'll need to add a remote repository, This command takes a remote name and a repository URL. Git doesn't care what you name your remotes, but it's typical to name your main one origin.
+
+git push -u origin master //git push to push commits made on your local branch to a remote repository. Push tells where to put our local commits when we are ready, here origin is github server and master is our default local branch name. -u tells Git to remember the parameters, so that next time we can simply run git push and Git will know what to do. 
+generates SHA
+
+// lookout for git 'hooks', eliminate the need to use FTP client
+
+git pull origin master // we can check changes on our github repository and pull down any new changes
+
+git stash // hide/stash the changes instead of committing when pulling
+git stash apply // re-apply changes after pulling
+
+git diff HEAD // get difference between your most recent commit and commits made by others, after our last commit to the repository. Here HEAD points to our most recent commit.
+
+git diff --staged // diff for staged changes
+
+The checkout command is used to copy files from the history (or stage) to the working directory, and to optionally switch branches.
+git checkout stuff       # checkout the branch stuff
+git checkout -- stuff    # checkout the file stuff
+git checkout -- octocat.txt // Change a file back to how it was at the last commit, getting rid of all changes since the last commit.
+
+git branch <branch_name> // Used when you are implementing features, where master branch is A and branch B is made by devs to test and implement some new features and to put the commits on or both branches can have half completed features either way which works! the end goal is to merge these two branches as a single master branch. octocat example, getting rid of all the other pesky cats!
+
+git checkout <branch_name> // switch branch
+
+git checkout -b new_branch // to create and checkout a branch at the same time. 
+// Similar to
+// git branch <branch_name>
+// git checkout <branch_name>
+
+git rm '*.txt' // remove files of some type by using a wildcard for type of file. This will also stage the changes for us to commit.
+git rm -r folder_of_cats // remove an entire folder. This will recursively remove all folders and files from the given directory.
+
+git commit -am <"message here"> // if 'git rm' not used for deleting files, you still need to call 'git rm' before commit, adding -a will auto remove the deleted files with commit operation.
+
+git merge <other_branch_to_merge_with_master> // merge changes from other branch into the master branch.
+
+git branch -d <branch name> // delete a branch
+// if the branch hasn't been merged it won't get deleted using the previous command
+// add the --force (-f) option or use -D which combines -d -f together into one command. 
